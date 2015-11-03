@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>startPage</title>
+
+    <style type="text/css">
+
+    </style>
+
+  </head>
+  <body>
+   <div id="site-box">
+
+   <div id="a-box">
+    <h1>START_PAGE</h1>
+    <A HREF="https://gist.github.com/shirai/0bafa06d16217f12b446">WebStorageドットインストールまとめ</A><br>
+    3つの色がついたページ(pageA~C)への遷移情報とページ滞在時間によって、異なるインプレッション[色が変わる]デモです。
+   </div>
+   <div id="b-box">
+    <INPUT type="button" value="PageAへ" name="btn_top_a" onclick="pageA()"value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#ff6868;border-color:#ff6868;border-width:2px">
+    <INPUT type="button" value="PageBへ" name="btn_top_b" onclick="pageB()" value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#009933;border-color:#009933;border-width:2px">
+    <INPUT type="button" value="PageCへ" name="btn_top_c" onclick="pageC()" value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#2864f0;border-color:#2864f0">
+      <br>
+      <br>
+    <INPUT type="button" value="storage_clear" name="storage_clear" onclick="ws_clear()" value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#FFFF00;border-color:#FFFF00">
+    <script type="text/javascript" src="./colorjs/rgbcolor.js">
+      var color = new RGBColor("rgb(30,120,210)");
+      //var color = new RGBColor("#1e78d2"); //カラーコードの場合
+ 
+      if(color.ok){
+       var result = color.r + "-" + color.g + "-" + color.b ;
+       var rgb = color.toRGB();
+       var hex = color.toHex();
+       document.getElementById("output").innerHTML =  result + "," + rgb + ","+hex;
+      }
+
+    </script>
+   </div>
+    
+   <div id="c-box">
+    <form name="myForm">
+    TOPページに <input type="text" size="10" name="myFormSec"> 滞在しています。<br>
+    </form>
+   </div>
+
+   <div id="d-box">
+    copyright (c) shirai All right reserved. 
+   </div>
+
+   </div>
+ 
+
+    <script type="text/javascript">
+
+      var st = (new Date()).getTime();
+      var ed;
+
+      //WebStrageの用意
+      var ls = sessionStorage;
+
+      var pageCnt = ls.getItem('pageCnt');
+
+      (function(){
+
+          if(typeof(Storage) === "undefined"){
+            alert("web storage Not Supported!")
+          } else {
+
+            console.log("supported!");
+
+
+            if(pageCnt == "" || isNaN(parseInt(pageCnt))){
+              pageCnt = 1;
+            }else{
+              pageCnt = parseInt(pageCnt) + 1;
+            }
+
+            //if(pageCnt == 11){
+            //  pageCnt = 1 ;
+            //}
+
+            var page_history1;
+            var page_history2;
+            var page_history3;
+            var page_history4;
+            var page_history5;
+            var page_history6;
+            var page_history7;
+            var page_history8;
+
+
+            if((pageCnt % 8) == 1){
+              page_history1 = 'top'
+              ls.setItem('page_history1',page_history1);
+            } else if ((pageCnt % 8) == 2){
+              page_history2 = 'top'
+              ls.setItem('page_history2',page_history2);
+            } else if ((pageCnt % 8) == 3){
+              page_history3 = 'top'
+              ls.setItem('page_history3',page_history3);
+            } else if ((pageCnt % 8) == 4){
+              page_history4 = 'top'
+              ls.setItem('page_history4',page_history4);
+            } else if ((pageCnt % 8) == 5){
+              page_history5 = 'top'
+              ls.setItem('page_history5',page_history5);
+            } else if ((pageCnt % 8) == 6){
+              page_history6 = 'top'
+              ls.setItem('page_history6',page_history6);
+            } else if ((pageCnt % 8) == 7){
+              page_history7 = 'top'
+              ls.setItem('page_history7',page_history7);
+            } else if ((pageCnt % 8) == 8){
+              page_history8 = 'top'
+              ls.setItem('page_history8',page_history8);
+            } 
+
+            ls.setItem('pageCnt',pageCnt);
+            
+
+
+            //st = (new Date()).getTime();
+            //alert(st);
+            //console.log(ls.getItem('name'));
+          }
+      })();
+    </script>
+
+
+    <script type="text/javascript"><!--
+    myCnt = 1;
+
+    function ws_clear(){
+      ls.clear();
+      ls.setItem("pageCnt",1);
+      page_history1 = 'top'
+      ls.setItem('page_history1',page_history1);
+    }
+    
+    function myFunc(){
+       document.myForm.myFormSec.value = myCnt + "秒";
+       myCnt = myCnt + 1;
+    }
+
+    function pageA(){
+
+      location.href='./pagea.html?abc=AA'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+      pageCnt = ls.getItem('pageCnt');
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+
+    }
+
+    function pageB(){
+      location.href='./pageb.html?abc=AA'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+
+     pageCnt = ls.getItem('pageCnt');
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+    }
+
+    function pageC(){
+      location.href='./pagec.html?abc=AA'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+
+      pageCnt = ls.getItem('pageCnt');
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+
+    }
+    //1秒ごとに実行。
+    setInterval("myFunc()",1000);
+    // --></script> 
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>HTML5 TIPS</title>
+<!--キャンバスの背景色／枠線を指定（3）-->
+<style>
+#cv {
+  background-color: #FFF;
+  border: 1px solid black;
+}
+</style>
+<script>
+window.addEventListener('DOMContentLoaded',
+  function() {
+    // Canvas APIが利用できるかを判定（1）
+    if (HTMLCanvasElement) {
+      // コンテキストオブジェクトを取得（2）
+      var cv = document.querySelector('#cv');
+      var c = cv.getContext('2d');
+      // 塗りつぶしの四角、枠線だけの四角を描画（3）
+      c.fillRect(20, 20, 150, 200);
+      c.strokeRect(10, 10, 200, 150);
+    }
+  }
+);
+</script>
+</head>
+<body>
+<!--キャンバスの準備（1）-->
+<canvas id="cv" width="400" height="300">
+  <!--Canvas機能に対応していないブラウザへの備え（2）-->
+  Canvas機能に対応したブラウザでアクセスしてください。
+</canvas>
+</body>
+</html>

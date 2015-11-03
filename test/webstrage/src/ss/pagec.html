@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>PageC</title>
+
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var ls = sessionStorage;
+      var pageCnt = ls.getItem('pageCnt')
+
+      var st = (new Date()).getTime();
+      var ed;
+
+      (function(){
+
+          if(typeof(Storage) === "undefined"){
+            alert("web storage Not Supported!")
+          } else {
+            console.log("supported!");
+
+            if(pageCnt == "" || isNaN(parseInt(pageCnt))){
+              pageCnt = 1;
+            }else{
+              pageCnt = parseInt(pageCnt) + 1;
+            }
+            
+            var page_history1;
+            var page_history2;
+            var page_history3;
+            var page_history4;
+            var page_history5;
+            var page_history6;
+            var page_history7;
+            var page_history8;
+
+            if((pageCnt % 8) == 1){
+              page_history1 = 'pageC'
+              ls.setItem('page_history1',page_history1);
+            } else if ((pageCnt % 8) == 2){
+              page_history2 = 'pageC'
+              ls.setItem('page_history2',page_history2);
+            } else if ((pageCnt % 8) == 3){
+              page_history3 = 'pageC'
+              ls.setItem('page_history3',page_history3);
+            } else if ((pageCnt % 8) == 4){
+              page_history4 = 'pageC'
+              ls.setItem('page_history4',page_history4);
+            } else if ((pageCnt % 8) == 5){
+              page_history5 = 'pageC'
+              ls.setItem('page_history5',page_history5);
+            } else if ((pageCnt % 8) == 6){
+              page_history6 = 'pageC'
+              ls.setItem('page_history6',page_history6);
+            } else if ((pageCnt % 8) == 7){
+              page_history7 = 'pageC'
+              ls.setItem('page_history7',page_history7);
+            } else if ((pageCnt % 8) == 0){
+              page_history8 = 'pageC'
+              ls.setItem('page_history8',page_history8);
+            } 
+
+            ls.setItem('pageCnt',pageCnt);
+            
+            //st = (new Date()).getTime();
+            //alert(st);
+            //console.log(ls.getItem('name'));
+          }
+      })();
+    </script>
+
+   <div id="site-box">
+    <div id="a-box">
+
+
+    <script type="text/javascript">
+     document.getElementById("a-box").style.color='#4200B7';
+    </script>
+
+<!--    <style type="text/css">
+    body {
+    background-color: #ccffff;
+    color: #000000;
+    }
+    </style>
+-->
+
+    <h1>PageC</h1>
+  </div>
+
+   <div id="b-box">
+
+    <INPUT type="button" value="PageAへ" name="btn_c_a" onclick="pageA()"value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#ff6868;border-color:#ff6868">
+    <INPUT type="button" value="PageBへ" name="btn_c_b" onclick="pageB()"value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#009933;border-color:#009933;border-width:2px">
+    <INPUT type="button" value="PageCへ" name="btn_c_c" onclick="pageC()"value="リンク文字" style="WIDTH: 20; HEIGHT: 10 ; background-color:#2864f0;border-color:#2864f0">
+    <br>
+    <br>
+    <INPUT type="button" value="TOPへ" name="btn_c_top" onclick="pageTop()"value="リンク文字" style="WIDTH: 20; HEIGHT: 10">
+
+   </div>
+    
+   <div id="c-box">
+
+      <input type="text" id="kekka1" value="ページ履歴のみを使って色判別" size=30 name="t0"><br>
+      <input type="text" id="kekka2" value="ページの滞在時間も使って色判別" size=30 name="t0">
+
+      <script type="text/javascript"><!--
+        var aryPage = new Array(7); 
+        aryPage[0] = ls.getItem('page_history1');
+        aryPage[1] = ls.getItem('page_history2');
+        aryPage[2] = ls.getItem('page_history3');
+        aryPage[3] = ls.getItem('page_history4');
+        aryPage[4] = ls.getItem('page_history5');
+        aryPage[5] = ls.getItem('page_history6');
+        aryPage[6] = ls.getItem('page_history7');
+        aryPage[7] = ls.getItem('page_history8');
+
+        //ページ滞在時間の取得
+        var aryPageTs = new Array(7); 
+        aryPageTs[0] = ls.getItem('page_ts1');
+        aryPageTs[1] = ls.getItem('page_ts2');
+        aryPageTs[2] = ls.getItem('page_ts3');
+        aryPageTs[3] = ls.getItem('page_ts4');
+        aryPageTs[4] = ls.getItem('page_ts5');
+        aryPageTs[5] = ls.getItem('page_ts6');
+        aryPageTs[6] = ls.getItem('page_ts7');
+        aryPageTs[7] = ls.getItem('page_ts8');
+
+        for(i = 0 ; i < aryPageTs.length; i++){
+          if(aryPageTs[i] == null){
+            aryPageTs[i] = 0.0;
+          }
+        }
+
+        var r_cnt =0;
+        var g_cnt =0;
+        var b_cnt =0;
+
+        var r_rate =0.0;
+        var g_rate =0.0;
+        var b_rate =0.0;
+
+        for(i = 0; i < aryPage.length; i++) {
+          if(aryPage[i] == 'pageA'){
+            r_cnt++;
+            r_rate += parseFloat(aryPageTs[i]);
+          } else if(aryPage[i] == 'pageB'){
+            g_cnt++;
+            g_rate += parseFloat(aryPageTs[i]);
+          } else if(aryPage[i] == 'pageC'){
+            b_cnt++;
+            b_rate += parseFloat(aryPageTs[i]);
+          }
+        }
+
+        var r = Math.round(256 * r_cnt/(r_cnt+g_cnt+b_cnt));
+        var g = Math.round(256 * g_cnt/(r_cnt+g_cnt+b_cnt));
+        var b = Math.round(256 * b_cnt/(r_cnt+g_cnt+b_cnt));
+
+
+        var r2 = Math.round(256 * r_rate/(r_rate+g_rate+b_rate));
+        var g2 = Math.round(256 * g_rate/(r_rate+g_rate+b_rate));
+        var b2 = Math.round(256 * b_rate/(r_rate+g_rate+b_rate));
+
+        //閲覧情報だけを利用した色付け
+        document.getElementById('kekka1').style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+
+        //滞在時間情報も利用した色付け
+        document.getElementById('kekka2').style.backgroundColor = 'rgb(' + r2 + ',' + g2 + ',' + b2 + ')';
+
+
+/*
+        var page2 = ls.getItem('page_history2');
+        var page3 = ls.getItem('page_history3');
+        var page4 = ls.getItem('page_history4');
+        var page5 = ls.getItem('page_history5');
+        var page6 = ls.getItem('page_history6');
+        var page7 = ls.getItem('page_history7');
+        var page8 = ls.getItem('page_history8');
+        
+        document.write(page1+"<br>");
+        document.createElement("input");
+        if(page1 == 'pageB'){
+          document.write("Greenだよー");
+        }
+*/
+      </script>
+
+   </div>
+
+   <div id="d-box">
+    copyright (c) shirai All right reserved. 
+   </div>
+  </div>
+
+    
+    <script type="text/javascript"><!--
+
+    function pageA(){
+
+      location.href='./pagea.html'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+
+    }
+
+    function pageB(){
+      location.href='./pageb.html'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+    }
+
+    function pageC(){
+      location.href='./pagec.html?abc=AA'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+
+    }
+
+    function pageTop(){
+      location.href='./index.html'
+
+      ed = (new Date()).getTime();
+      tm = (ed - st) / 1000;
+      //ls.setItem('page1_ts',tm);
+
+     if((pageCnt % 8) == 1){
+       ls.setItem('page_ts1',tm);
+     } else if ((pageCnt % 8) == 2){
+       ls.setItem('page_ts2',tm);
+     } else if ((pageCnt % 8) == 3){
+       ls.setItem('page_ts3',tm);
+     } else if ((pageCnt % 8) == 4){
+       ls.setItem('page_ts4',tm);
+     } else if ((pageCnt % 8) == 5){
+       ls.setItem('page_ts5',tm);
+     } else if ((pageCnt % 8) == 6){
+       ls.setItem('page_ts6',tm);
+     } else if ((pageCnt % 8) == 7){
+       ls.setItem('page_ts7',tm);
+     } else if ((pageCnt % 8) == 0){
+       ls.setItem('page_ts8',tm);
+     } 
+
+    }
+    // --></script> 
+
+  </body>
+</html>
